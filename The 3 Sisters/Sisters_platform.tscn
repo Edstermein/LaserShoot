@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://The 3 Sisters/Sister_turrets.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://The 3 Sisters/Sisters_platform.gd" type="Script" id=3]
+
+[node name="Sisters_platform" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color( 0.933333, 0.0901961, 0.0901961, 1 )
+polygon = PoolVector2Array( 18.3564, -306.29, 1647.53, -300.634, 1641.87, 1000.44, -9.92786, 989.129 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 442.635, 226.243 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_left = -10
+limit_top = -300
+limit_right = 1650
+limit_bottom = 980
+editor_draw_limits = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -4.271, -374.173, 32.3702, -308.304, 1636.22, -294.977, 1647.53, 983.472, 18.3564, 977.816, 17.5084, -298.233, -39.5092, -380.196, -60.8395, 1034.38, 97.5524, 1057.01, 1545.71, 1085.3, 1800.27, 1062.67, 1777.64, -379.83 )
+
+[node name="Sister_turrets" parent="." instance=ExtResource( 1 )]
+position = Vector2( 803.633, 432.998 )
+
+[node name="Sister_turrets2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1220.1, 27.2066 )
+
+[node name="Sister_turrets3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 443.226, 35.2156 )
+
+[connection signal="destroyedturret" from="Sister_turrets" to="." method="_on_Sister_turrets_destroyedturret"]
+[connection signal="destroyedturret" from="Sister_turrets2" to="." method="_on_Sister_turrets_destroyedturret"]
+[connection signal="destroyedturret" from="Sister_turrets3" to="." method="_on_Sister_turrets_destroyedturret"]

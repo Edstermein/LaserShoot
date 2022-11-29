@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Born2bSportyV2.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Other_screens/GameOver.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 200
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 1 )
+
+[node name="GameOver" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1022.0
+margin_bottom = 619.0
+color = Color( 0.752941, 0.0980392, 0.0980392, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 44.0109
+margin_top = 37.2446
+margin_right = 1214.02
+margin_bottom = 381.245
+custom_fonts/font = SubResource( 1 )
+text = "GAME OVER!!!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highestlvl" type="Label" parent="."]
+margin_left = 201.156
+margin_top = 263.982
+margin_right = 1371.16
+margin_bottom = 607.982
+custom_fonts/font = SubResource( 2 )
+text = "Highest level : ##"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 359.531
+margin_top = 450.615
+margin_right = 624.531
+margin_bottom = 518.615
+custom_fonts/font = SubResource( 3 )
+text = "Try Again???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

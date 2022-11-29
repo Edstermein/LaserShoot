@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Boss/Boss!.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player_stuff/Hp Bar.png" type="Texture" id=3]
+[ext_resource path="res://Boss/Boss life.gd" type="Script" id=4]
+
+[node name="Boss" type="Node2D"]
+
+[node name="background3" type="Polygon2D" parent="."]
+position = Vector2( 189.648, 2.0007 )
+scale = Vector2( 0.862627, 0.983945 )
+color = Color( 0.215686, 0.823529, 0.380392, 1 )
+polygon = PoolVector2Array( -1051.12, -1130.94, 3038.67, -1152.67, 3013.88, 224.927, 3030.41, 1260.75, -1067.64, 1259.41, -1039.35, 185.626 )
+
+[node name="Boss life" type="TextureProgress" parent="."]
+margin_left = 545.527
+margin_top = -167.007
+margin_right = 745.527
+margin_bottom = -127.007
+rect_scale = Vector2( 2.5, 2.5 )
+max_value = 3000.0
+value = 3000.0
+texture_progress = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Boss!" parent="Boss life" instance=ExtResource( 2 )]
+position = Vector2( 104.251, 142.392 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="border" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="border"]
+position = Vector2( 0, 5.33936 )
+polygon = PoolVector2Array( -788.346, -1133.04, -802.6, 1261.7, 2974.81, 1254.57, 2889.28, -1168.67, -688.565, -1168.67, -603.039, -1090.27, 2768.12, -1033.26, 2796.63, 1119.15, -660.056, 1126.28, -631.548, -1040.38, -731.328, -1161.55 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 300, 300 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 2, 2 )
+
+[connection signal="life" from="Boss life/Boss!" to="Boss life" method="_on_Boss_life"]

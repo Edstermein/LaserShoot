@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://The 3 Sisters/Heat_seeking_missile.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 39.8534
+
+[node name="Heat_seeking_missile" type="Area2D"]
+collision_layer = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.88776, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_Heat_seeking_missile_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

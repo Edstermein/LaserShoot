@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Spawn_range.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Stay in the Circle/Circle_platform.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 177.751
+
+[node name="Circle_platform" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="background" type="Polygon2D" parent="."]
+position = Vector2( 11.3137, 0 )
+color = Color( 0.333333, 0.113725, 0.231373, 1 )
+polygon = PoolVector2Array( -405.903, -312.332, 2083.11, -301.018, 2122.71, 1288.56, -422.874, 1316.84 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -315.394, -436.783, -400.246, -329.303, 2105.74, -312.332, 2122.71, 1277.24, -394.59, 1333.81, -405.903, -295.361, -422.874, -306.675, -575.609, -357.587, -598.236, 440.028, -547.324, 1429.98, 2196.25, 1373.41, 2224.53, -436.783, 1511.77, -425.469 )
+
+[node name="left" type="Position2D" parent="."]
+position = Vector2( -302.074, 457.582 )
+
+[node name="right" type="Position2D" parent="."]
+position = Vector2( 1961.79, 451.308 )
+
+[node name="top" type="Position2D" parent="."]
+position = Vector2( 848.641, -299.901 )
+
+[node name="bottom" type="Position2D" parent="."]
+position = Vector2( 882.252, 1188.04 )
+
+[node name="Circle" type="Polygon2D" parent="."]
+position = Vector2( 875.653, 526.373 )
+scale = Vector2( 1.61728, 1.66906 )
+polygon = PoolVector2Array( -167.747, -129.054, -69.1927, -169.404, 22.9862, -165.369, 110.538, -138.43, 164.416, -71.0822, 177.886, 3.00024, 166.661, 47.8987, 108.293, 124.226, 29.721, 139.941, -118.444, 146.675, -170.077, 99.532, -185.792, 0.75531 )
+
+[node name="Area2D" type="Area2D" parent="Circle"]
+position = Vector2( 112.181, 54.3504 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Area2D"]
+position = Vector2( -135.083, -60.3893 )
+shape = SubResource( 1 )
+
+[node name="Spawn_range" parent="." instance=ExtResource( 1 )]
+position = Vector2( -281.429, -392.45 )
+
+[node name="Spawn_range2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -125.199, 1467.19 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 254.556, 210.146 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+
+[connection signal="body_entered" from="Circle/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Circle/Area2D" to="." method="_on_Area2D_body_exited"]

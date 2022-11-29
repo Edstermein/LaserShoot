@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Boss/Boss!.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 191.132
+
+[node name="Boss!" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="Body" type="Polygon2D" parent="."]
+position = Vector2( 1.43714, 22.1402 )
+scale = Vector2( 3.52106, 3.33477 )
+color = Color( 0.0941176, 0.341176, 0.392157, 1 )
+polygon = PoolVector2Array( -3.54077, -63.2133, -48.773, -49.1503, -52.9291, -13.825, -51.045, 30.0156, -6.90817, 47.9104, 26.7657, 38.9307, 52.5823, 28.8286, 48.357, 0.628286, 50.061, -17.364, 34.6229, -29.5394, 29.0446, -41.9534, 7.68384, -43.009, 11.0512, -67.7031, 34.6229, -80.0502, 11.0512, -82.2951 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

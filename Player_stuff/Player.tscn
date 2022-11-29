@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player_stuff/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player_stuff/Laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player_stuff/HUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.0103, 16.0202 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="Laser" parent="." instance=ExtResource( 2 )]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 1.41582, 1.41581 )
+color = Color( 0.176471, 0.0823529, 0.0823529, 1 )
+polygon = PoolVector2Array( -20.0497, -18.4017, 18.8851, -17.6938, 19.1211, 14.6339, -19.8137, 14.6339 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2( 2.35969, 3.06759 )
+color = Color( 0.482353, 0.823529, 0.27451, 1 )
+polygon = PoolVector2Array( -13.6785, -13.2104, 11.0982, -13.9183, 10.3903, 5.43116, -13.6785, 5.19519 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.50511, -0.765293 )
+shape = SubResource( 1 )

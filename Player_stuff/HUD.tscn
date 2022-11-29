@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player_stuff/HUD.gd" type="Script" id=1]
+[ext_resource path="res://Born2bSportyV2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Player_stuff/Hp Bar frame.png" type="Texture" id=3]
+[ext_resource path="res://Player_stuff/Hp Bar.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.137255 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+extra_spacing_top = 9
+extra_spacing_bottom = 3
+extra_spacing_char = 10
+extra_spacing_space = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 102
+extra_spacing_top = 9
+extra_spacing_bottom = 3
+extra_spacing_char = 10
+extra_spacing_space = 12
+font_data = ExtResource( 2 )
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 109.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -0.287589
+margin_top = 41.8863
+margin_right = 199.712
+margin_bottom = 71.8863
+rect_scale = Vector2( 2.5, 2 )
+value = 100.0
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Life Progress" type="Label" parent="."]
+margin_left = 11.3138
+margin_right = 297.314
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 2 )
+text = "Life Progress"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="."]
+margin_left = 593.009
+margin_right = 810.009
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 2 )
+text = "Level :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lvl_Number" type="Label" parent="."]
+margin_left = 788.702
+margin_top = -3.57043
+margin_right = 910.702
+margin_bottom = 229.43
+custom_fonts/font = SubResource( 3 )
+text = "##
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player_stuff/Laser.gd" type="Script" id=1]
+[ext_resource path="res://Player_stuff/laserstuff.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.4, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 174.6
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 285.71
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 206.35
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 100.0
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_intensity = 0.3
+glow_strength = 0.91
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
+glow_hdr_luminance_cap = 58.54
+glow_bicubic_upscale = true
+
+[node name="Laser" type="RayCast2D"]
+enabled = true
+cast_to = Vector2( 1000, 0 )
+collision_mask = 22
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+self_modulate = Color( 2, 2, 2, 1 )
+position = Vector2( 1.80861, 0 )
+points = PoolVector2Array( 0, 0, 100, 0 )
+default_color = Color( 0.776471, 0.921569, 0.168627, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Castingparticles" type="Particles2D" parent="."]
+emitting = false
+lifetime = 0.3
+process_material = SubResource( 5 )
+texture = ExtResource( 2 )
+
+[node name="Collisionparticles" type="Particles2D" parent="."]
+modulate = Color( 2, 2, 2, 1 )
+emitting = false
+lifetime = 0.3
+process_material = SubResource( 6 )
+texture = ExtResource( 2 )
+
+[node name="Beamparticles" type="Particles2D" parent="."]
+modulate = Color( 2, 2, 0, 1 )
+emitting = false
+lifetime = 0.3
+visibility_rect = Rect2( -1, -1, 2, 200 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="New_hitter" type="RayCast2D" parent="."]
+scale = Vector2( 4, 4 )
+cast_to = Vector2( 5, 0 )
+collision_mask = 20

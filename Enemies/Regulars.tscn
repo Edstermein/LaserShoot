@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Enemies/Regulars.gd" type="Script" id=1]
+
+[node name="Regulars" type="KinematicBody2D" groups=[
+"Enemies",
+]]
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -2.90189, -2.51936 )
+scale = Vector2( 0.926264, 0.842105 )
+color = Color( 0.101961, 0.898039, 1, 1 )
+polygon = PoolVector2Array( 56.1572, -1.45552, 2.8373, -69.4346, -51.6944, -0.122608, 2.8373, 69.1894 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -18.9371, 0.12247 )
+scale = Vector2( 1.28943, 1 )
+polygon = PoolVector2Array( 13.9109, -54.1225, -20.2127, -2.62247, 14.2986, 49.3775, 47.6467, -3.62247 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -0.5, -60, -50.5, -2, -1, 54.5, 48.5, -3 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

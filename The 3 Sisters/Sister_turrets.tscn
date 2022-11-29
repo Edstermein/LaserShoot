@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://The 3 Sisters/Sister_turrets.gd" type="Script" id=2]
+[ext_resource path="res://Player_stuff/Hp Bar.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 84.6147, 70.5962 )
+
+[node name="Sister_turrets" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -85.1382, -71.709, 82.8712, -67.9335, 86.6467, 75.5353, -83.2505, 75.5353 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Hp_bar" type="TextureProgress" parent="."]
+margin_left = -98.1628
+margin_top = -154.795
+margin_right = 101.837
+margin_bottom = -114.795
+max_value = 1500.0
+value = 1500.0
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="head" type="Polygon2D" parent="."]
+color = Color( 0.74902, 0.670588, 0.235294, 1 )
+polygon = PoolVector2Array( -28.5059, -67.9335, -34.1691, 0.0254517, 47.004, -1.8623, 31.902, -64.158 )
+
+[node name="head2" type="Polygon2D" parent="head"]
+position = Vector2( 3.07307, 20.0333 )
+scale = Vector2( 1.04918, 1.23077 )
+color = Color( 0.156863, 0.027451, 0.027451, 1 )
+polygon = PoolVector2Array( -37.9446, -86.8109, 39.4531, -84.9232, 56.2658, -51.5336, -55.2883, -46.9323 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

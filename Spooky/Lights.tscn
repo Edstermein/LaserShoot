@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Spooky/Lights.gd" type="Script" id=1]
+[ext_resource path="res://Spooky/Biglight.png" type="Texture" id=2]
+
+[node name="Lights" type="StaticBody2D"]
+collision_layer = 16
+script = ExtResource( 1 )
+
+[node name="skin" type="Polygon2D" parent="."]
+color = Color( 0.909804, 0.145098, 0.541176, 1 )
+polygon = PoolVector2Array( -0.322693, -98.7831, -100, 0, 0, 100, 100, 0 )
+
+[node name="body" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 1.01215, -77.4257, -79.0782, -4.00949, 1.01215, 77.4157, 78.4329, -1.33978 )
+
+[node name="detect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="detect"]
+polygon = PoolVector2Array( -0.322693, -98.7831, -103.105, -2.67465, -1.65753, 97.4384, 98.4554, -8.01401 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
