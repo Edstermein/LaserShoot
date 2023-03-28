@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://NewPlatform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Spawn_range.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Center_of_attention/Platform_attention.gd" type="Script" id=4]
+[ext_resource path="res://Born2bSportyV2.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 217.498
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2, 2.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/text:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 5 )
+
+[node name="Platform_attention" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="NewPlatform" parent="." instance=ExtResource( 2 )]
+position = Vector2( 154.33, 399.484 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Spotlight" type="Area2D" parent="."]
+position = Vector2( 978.636, 181.019 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spotlight"]
+shape = SubResource( 1 )
+
+[node name="light" type="Polygon2D" parent="Spotlight"]
+modulate = Color( 1, 1, 1, 0.317647 )
+polygon = PoolVector2Array( -20.0186, -225.706, -168.184, -140.399, -208.592, -37.1322, -181.653, 111.033, -69.407, 200.83, 110.187, 182.87, 195.494, 84.0937, 213.454, -77.5409, 132.636, -185.297 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 155.235, -48.3268 )
+polygon = PoolVector2Array( -354.888, 131.263, -388.524, 595.438, -321.363, 835.217, 17.1784, 902.926, 309.393, 817.399, 17.1784, 739, -182.383, 699.801, -157.438, 357.696, 358.192, 306.17, 371.646, 279.261 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2( 139.623, -29.38 )
+color = Color( 0.698039, 0.223529, 0.160784, 1 )
+polygon = PoolVector2Array( -368.343, 70.7189, -395.251, 602.165, -307.798, 797.253, 21.8334, 884.707, 317.829, 770.345, -173.255, 655.983, -179.982, 319.624, 443.721, 239.461 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 1708.37, 205.705 )
+polygon = PoolVector2Array( 481.124, 391.253, 326.399, 660.339, -225.229, 606.522, 582.031, 889.063, 844.391, 707.43, 622.394, -153.648 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2( 1731.84, 213.256 )
+color = Color( 0.698039, 0.223529, 0.160784, 1 )
+polygon = PoolVector2Array( 460.942, 384.525, 312.944, 673.794, -279.047, 613.249, 595.486, 895.79, 844.391, 707.43, 622.394, -194.011 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 442.607, 365.436 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 2866.41, 1492.21 )
+
+[node name="End_game" type="Timer" parent="."]
+
+[node name="Spawn_range" parent="." instance=ExtResource( 3 )]
+position = Vector2( 164.449, -889.515 )
+
+[node name="Spawn_range2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 164.449, 1790.48 )
+
+[node name="Spawn_range3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -956.853, -408.96 )
+rotation = 1.5708
+
+[node name="Spawn_range4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3578.86, -398.881 )
+rotation = 1.5708
+
+[node name="a" type="AnimationPlayer" parent="."]
+"anims/fade intro" = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 119.275
+margin_top = 194.402
+margin_right = 1596.28
+margin_bottom = 895.402
+custom_fonts/normal_font = SubResource( 3 )
+text = "      Center of Attention!!
+
+Stay in the spotlight for 30 seconds"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="body_entered" from="Spotlight" to="." method="_on_Spotlight_body_entered"]
+[connection signal="body_exited" from="Spotlight" to="." method="_on_Spotlight_body_exited"]
+[connection signal="timeout" from="End_game" to="." method="_on_End_game_timeout"]

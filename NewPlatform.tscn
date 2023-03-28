@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="NewPlatform" type="Node2D"]
+
+[node name="background" type="Polygon2D" parent="."]
+position = Vector2( -2694.95, -1225.88 )
+scale = Vector2( 0.862627, 0.983945 )
+color = Color( 0.913725, 0.72549, 0.329412, 1 )
+offset = Vector2( 3415.31, 1229.18 )
+polygon = PoolVector2Array( -1051.12, -1130.94, 3038.67, -1152.67, 3013.88, 224.927, 3030.41, 1260.75, -1067.64, 1259.41, -1039.35, 185.626 )
+
+[node name="border" type="StaticBody2D" parent="."]
+position = Vector2( 4.48975, 0 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="border"]
+polygon = PoolVector2Array( -788.346, -1133.04, -802.6, 1261.7, 2974.81, 1254.57, 2889.28, -1168.67, -688.565, -1168.67, -603.039, -1090.27, 2768.12, -1033.26, 2796.63, 1119.15, -660.056, 1126.28, -631.548, -1040.38, -731.328, -1161.55 )

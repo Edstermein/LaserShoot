@@ -3,8 +3,8 @@ extends StaticBody2D
 var open = false
 var player = null
 
-var max_health = Global.boss_health
-var current_health = Global.boss_health
+var max_health = Global.boss_health * 0.7
+var current_health = Global.boss_health * 0.7
 
 var fire_once = true
 var projectile = preload("res://The 3 Sisters/Heat_seeking_missile.tscn")

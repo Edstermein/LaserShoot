@@ -1,11 +1,44 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Spawn_range.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Stay in the Circle/Circle_platform.gd" type="Script" id=3]
+[ext_resource path="res://Born2bSportyV2.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 177.751
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/text:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Circle_platform" type="Node2D"]
 script = ExtResource( 3 )
@@ -58,6 +91,25 @@ position = Vector2( 254.556, 210.146 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 zoom = Vector2( 1.5, 1.5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.818182 )
+margin_left = -20.1589
+margin_top = 85.6747
+margin_right = 1057.84
+margin_bottom = 579.675
+custom_fonts/normal_font = SubResource( 2 )
+text = "       Stay in the circle
+	
+To move on to the next level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="a" type="AnimationPlayer" parent="."]
+anims/intro = SubResource( 3 )
 
 [connection signal="body_entered" from="Circle/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Circle/Area2D" to="." method="_on_Area2D_body_exited"]

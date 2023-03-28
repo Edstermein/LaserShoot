@@ -8,9 +8,9 @@ var player = null
 signal life(life_left)
 var vel = Vector2()
 var SPEED = 50
+var damage = 30
 	
 func _ready():
-	print(max_health)
 	var tree = get_tree()
 	if tree.has_group("Player"): # ensure "player" is created an added in a group called "Player"
 		player = tree.get_nodes_in_group("Player")[0] #detects player without using area2d
@@ -59,3 +59,8 @@ func damaged(value):
 	
 func _on_Timer_timeout():
 	bullet_spawn()
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		body.hurt(damage)

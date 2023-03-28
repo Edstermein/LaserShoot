@@ -8,7 +8,7 @@ func _process(delta):
 
 func _on_Bullets_body_entered(body):
 	if body.is_in_group("Player"):
-		body.hurt(5)
+		body.hurt(10)
 		queue_free()
 	else:
 		queue_free()

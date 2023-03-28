@@ -10,6 +10,7 @@ var relocation_times = 0
 func _ready():
 	randomize()
 	set_process(false)
+	$a.play("intro")
 
 func _process(delta):
 	var max_pts = 300
@@ -23,7 +24,6 @@ func _process(delta):
 		var PosY = rand_range($top.position.y,$bottom.position.y)
 		$Circle.position = Vector2(PosX,PosY)	
 		if relocation_times >= 3:
-			print("done!")
 			Global.change_scene()	
 			
 

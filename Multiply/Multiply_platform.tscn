@@ -1,0 +1,130 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Born2bSportyV2.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Player_stuff/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Spawn_range.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Multiply/Multiply_platform.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/text:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.6, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+extra_spacing_space = 7
+font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+export var timer = 1
+var preloaded_enemies = preload(\"res://Enemies/Multipliers.tscn\")
+
+func _ready():
+	randomize()
+	$Timer.start(Global.spawn_frequency_on_timer)
+
+func _on_Timer_timeout():
+
+	var enemypreload = preloaded_enemies.instance()
+	var xPos = rand_range($pos1.position.x, $pos2.position.x) # allows for random spawn within the two positions
+	enemypreload.position = Vector2(xPos,self.position.y) # preload spawn within desired coordinates
+	get_tree().current_scene.add_child(enemypreload)
+"
+
+[node name="Multiply_platform" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="background2" type="Polygon2D" parent="."]
+position = Vector2( -3101.92, -1185.65 )
+scale = Vector2( 0.862627, 0.983945 )
+color = Color( 0.356863, 0.690196, 0.129412, 1 )
+offset = Vector2( 3415.31, 1229.18 )
+polygon = PoolVector2Array( -1051.12, -1130.94, 3038.67, -1152.67, 3013.88, 224.927, 3030.41, 1260.75, -1067.64, 1259.41, -1039.35, 185.626 )
+
+[node name="border2" type="StaticBody2D" parent="."]
+position = Vector2( -348.696, 39.6116 )
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="border2"]
+polygon = PoolVector2Array( -788.346, -1133.04, -802.6, 1261.7, 2974.81, 1254.57, 2889.28, -1168.67, -688.565, -1168.67, -603.039, -1090.27, 2768.12, -1033.26, 2796.63, 1119.15, -660.056, 1126.28, -631.548, -1040.38, -731.328, -1161.55 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 233.981, 211.553 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 1.3, 1.3 )
+
+[node name="a" type="AnimationPlayer" parent="."]
+anims/intro = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 93.3064
+margin_top = 133.249
+margin_right = 990.306
+margin_bottom = 452.249
+custom_fonts/normal_font = SubResource( 2 )
+text = "		 Multilpy
+KILL...ME....FOR....A...SURPRISE
+They want to come out
+Survive 30 seconds
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="multiply_spawn" parent="." instance=ExtResource( 3 )]
+position = Vector2( -187.74, -1091.63 )
+script = SubResource( 3 )
+
+[node name="multiply_spawn2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -85.6443, 1505.04 )
+script = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 1275.74, 836.983, 1606.29, 930.215, 1911.42, 752.225, 2199.59, 481.003, 2114.83, 65.6934, 1767.33, -197.053, 1453.73, -205.529, 1767.33, -10.588, 1970.75, 269.11, 1852.09, 531.857, 1309.64, 743.75, 868.905, 709.847 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+color = Color( 0.411765, 0.0313726, 0.109804, 1 )
+polygon = PoolVector2Array( 1496.11, -205.529, 1818.18, -205.529, 2123.31, 74.1691, 2199.59, 455.576, 1945.32, 726.798, 1648.67, 921.74, 1284.21, 845.458, 894.332, 701.371, 1292.69, 735.274, 1826.66, 540.333, 1953.79, 294.537, 1750.38, -2.1123 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 648.537, -705.596, -63.4226, -603.887, -283.791, -391.995, -461.781, -180.102, -419.402, 82.6448, -317.694, 303.013, -173.607, 438.624, 21.3345, 523.381, -173.607, 294.537, -215.985, 14.8391, 4.38306, -307.238, 758.721, -561.509 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D"]
+color = Color( 0.298039, 0.0392157, 0.160784, 1 )
+polygon = PoolVector2Array( 724.818, -561.509, 640.061, -705.596, -71.8984, -620.839, -461.781, -197.053, -427.878, 91.1205, -281.395, 342.093, -175.562, 437.847, -4.21265, 513.442, -224.461, -2.1123, -37.9956, -298.762 )
+
+[node name="End_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="End_timer" to="." method="_on_End_timer_timeout"]

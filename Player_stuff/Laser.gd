@@ -1,7 +1,7 @@
 extends RayCast2D
 
 var is_casting := false setget set_is_casting
-
+var damage = Global.Player_atk
 func _ready():
 	set_physics_process(false)
 	$Line2D.points[1] = Vector2.ZERO
@@ -35,7 +35,7 @@ func _physics_process(delta):
 		if $New_hitter.get_collider().has_method("hit"):
 			$New_hitter.get_collider().hit()			
 		if $New_hitter.get_collider().has_method("damaged"):
-			$New_hitter.get_collider().damaged(5) #collider gets the body of the object interacting
+			$New_hitter.get_collider().damaged(damage) #collider gets the body of the object interacting
 			
 
 func set_is_casting(cast: bool):

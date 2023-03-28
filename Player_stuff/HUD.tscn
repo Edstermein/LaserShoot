@@ -51,9 +51,10 @@ __meta__ = {
 }
 
 [node name="Life Progress" type="Label" parent="."]
-margin_left = 11.3138
-margin_right = 297.314
-margin_bottom = 43.0
+margin_left = 15.7683
+margin_top = -1.78181
+margin_right = 301.768
+margin_bottom = 41.2182
 custom_fonts/font = SubResource( 2 )
 text = "Life Progress"
 __meta__ = {

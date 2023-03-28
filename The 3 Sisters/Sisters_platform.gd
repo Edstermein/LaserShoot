@@ -2,6 +2,8 @@ extends Node2D
 
 var value = 0
 
+func _ready():
+	$a.play("intro")
 func all_destroyed():
 	Global.change_scene()
 

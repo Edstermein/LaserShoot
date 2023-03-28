@@ -1,18 +1,19 @@
 extends KinematicBody2D
 
-var health = Global.regular_foe_health
+
+var health = Global.regular_foe_health 
 var player = null
-var SPEED = 200
+var SPEED = 400
 var vel = Vector2()
 var hittable = true
 var damage = 10
 
-func _ready():
-	var hittable = true
-	var tree = get_tree() # to call tree
-	if tree.has_group("Player"): # ensure "player" is created an added in a group called "Player"
-		player = tree.get_nodes_in_group("Player")[0] #detects player without using area2d
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var tree = get_tree()
+	if tree.has_group("Player"):
+		player = tree.get_nodes_in_group("Player")[0]
 
 func _physics_process(delta):
 	if player != null:
@@ -33,6 +34,9 @@ func damaged(value):
 func _on_Timer_timeout():
 	set_modulate(Color(1,1,1,1))
 
-func _on_Area2D_body_entered(body):
+func _on_hurt_body_entered(body):
 	if body.is_in_group("Player"):
 		body.hurt(damage)
+
+
+

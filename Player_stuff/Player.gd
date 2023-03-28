@@ -1,12 +1,8 @@
 extends KinematicBody2D
 
-var Life = 100
-var score = 0
 
 var vel = Vector2()
 var speed = 70
-
-signal hit_recommend()
 
 func _physics_process(delta): 
 	if Input.is_action_pressed("up"):
@@ -24,13 +20,16 @@ func _physics_process(delta):
 
 	look_at(get_global_mouse_position()) 
 	
-func score_a_point(value):
-	score += value
-	print(score)
-	if score >= 5:
-		emit_signal("hit_recommend")
-	
-	
 func hurt(damage):
-	Life -= damage
-	$HUD.hp_bar(Life)
+	Global.Player_health -= damage
+	$HUD.hp_bar(Global.Player_health)
+	set_collision_layer_bit(0,false) #undetectable
+	set_collision_mask_bit(2,false) #can pass through enemies
+	set_modulate(Color(1,1,1,0.3))
+	$able_to_hit.start(2)
+
+
+func _on_able_to_hit_timeout():
+	set_collision_layer_bit(0,true)
+	set_collision_mask_bit(2,true) 
+	set_modulate(Color(1,1,1,1))
